@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <title>Vue - Lifecycle</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <style>
+            .red-color {
+                color:#990000;
+                font-weight:bold;
+            }
+            .green-color {
+                color:#007700;
+                font-weight:bold;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div id="app">
+                <h3>{{ message }}</h3>
+                <!-- 1. Make the lottery run when the page is loaded -->
+                <button @click="selectWinner">
+                    Am I a Winner?
+                </button>
+                <div class="row" v-show="buttonClicked">
+                    <div v-if="!winner" class="col-6" :class="{'red-color': !winner}">
+                        You were not selected as the winner.
+                    </div>
+                    <div v-else class="col-6" :class="{'green-color': winner}">
+                        You won!
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    message: 'Vue Lottery!',
+                    winner: false,
+                    buttonClicked: false
+                },
+                methods: {
+                    selectWinner: function() {
+                        this.buttonClicked = true;
+                        this.winner = Math.round(Math.random());
+                    }
+                },
+                created: function() {
+                    this.selectWinner();
+                }
+            })
+        </script>
+    </body>
+</html>

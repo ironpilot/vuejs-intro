@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <title>Vue - Computed Properties</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <style>
+            .red-color {
+                color:#990000;
+                font-weight:bold;
+            }
+            .green-color {
+                color:#007700;
+                font-weight:bold;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div id="app">
+                <h3>{{ message }}</h3>
+                <!-- 1. Create a list of numbers from 1 to 20 -->
+                <!-- 2. Filter the list for only prime numbers -->
+                <!-- 3. EXTRA CREDIT. Create a button to add numbers to the array. -->
+                <ul>
+                    <li v-for="number in primeNumbers">{{ number }}</li>
+                </ul>
+            </div>
+        </div>
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    message: 'Prime Numbers',
+                    numbers: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+                },
+                methods: {
+                    isPrime: function(number) {
+                        if (number < 2) return false;
+
+                        var q = Math.floor(Math.sqrt(number));
+
+                        for (var i = 2; i <= q; i++)
+                        {
+                            if (number % i === 0)
+                            {
+                                return false;
+                            }
+                        }
+
+                        return true;
+                    }
+                },
+                computed: {
+                    primeNumbers: function () {
+                        var primes = [];
+                        var self = this;
+                        this.numbers.forEach(function (number) {
+                            if(self.isPrime(number)) {
+                                primes.push(number);
+                            }
+                        });
+
+                        return primes;
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

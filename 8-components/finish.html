@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <title>Vue - Components</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div id="app">
+                <h3>Tweets</h3>
+                <!-- 1. Create a component to represent a single tweet. -->
+                <!-- 2. Pass in the author and tweet message as a prop. -->
+                <!-- 3. Allow each tweet to be voted up or voted down. -->
+                <!-- 4. EXTRA: Add prop types and validations for each prop. -->
+                <tweet-post author="User 1" post="Hello World"></tweet-post>
+                <tweet-post author="The Expert Beginner" post="Who said anything about Javascript? We don't jump on every passing fad that comes along."></tweet-post>
+                <tweet-post author="Khalid Abuhakmeh" post="When my dog wants to ride in the car, I just sit him in it and make vrooom noises #GoodEnough"></tweet-post>
+            </div>
+        </div>
+        <script>
+            Vue.component('tweet-post', {
+                data: function () {
+                    return {
+                        upVotes: 0,
+                        downVotes: 0
+                    }
+                },
+                props: {
+                    author: {
+                        type: String,
+                        required: true
+                    },
+                    post: {
+                        type: String,
+                        required: true
+                    }
+                },
+                methods: {
+                    voteUp: function () {
+                        this.upVotes++;
+                    },
+                    voteDown: function () {
+                        this.downVotes++;
+                    }
+                },
+                template: `
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{{ author }}</h5>
+        {{ post }}<br>
+        {{ upVotes }} <button @click="voteUp" class="btn btn-primary btn-sm"><i class="fas fa-thumbs-up"></i></button> &nbsp;&nbsp;&nbsp;&nbsp;
+        {{ downVotes }} <button @click="voteDown" class="btn btn-primary btn-sm"><i class="fas fa-thumbs-down"></i></button>
+    </div>
+</div>`
+            });
+
+            var app = new Vue({
+                el: '#app',
+                data: {
+
+                }
+            })
+        </script>
+    </body>
+</html>
