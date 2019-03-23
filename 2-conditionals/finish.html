@@ -19,7 +19,7 @@
     <body>
         <div class="container">
             <div id="app">
-                <h3>{{ sayHi(winner) }}</h3>
+                <h3>{{ message }}</h3>
                 <div class="row">
                     <div v-if="!winner" class="col-6" :class="{'red-color': !winner}">
                         You were not selected as the winner.
@@ -36,12 +36,6 @@
                 data: {
                     message: 'Vue Lottery!',
                     winner: true
-                },
-                methods: {
-                    sayHi: function(value) {
-                        this.winner;
-                        return value;
-                    }
                 }
             })
         </script>
